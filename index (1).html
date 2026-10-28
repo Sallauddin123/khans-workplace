@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KHAN’s Workplace – Car Modification, Repair, Paint &amp; Interiors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#15181c;--steel:#232830;--line:#3a414c;--concrete:#e4e3de;--paper:#f3f2ee;--yellow:#f4c20d;--paint:#c8201f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;font-family:Archivo,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-stretch:75%;font-weight:800;line-height:1;margin:0;letter-spacing:.2px}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink);color:var(--paper);border-bottom:3px solid var(--yellow)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-stretch:75%;font-weight:800;font-size:24px;text-decoration:none}
+.logo b{background:var(--yellow);color:var(--ink);padding:0 7px;margin-right:6px}
+nav a{margin-left:18px;text-decoration:none;font-size:15px;font-weight:600}
+nav a:hover{color:var(--yellow)}
+@media(max-width:700px){nav a:not(.btn){display:none}}
+.btn{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:700;padding:12px 22px;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:700;border-radius:3px}
+.btn:hover{background:#fff}
+.btn.ghost{background:transparent;color:inherit;border:2px solid currentColor}
+.hero{background:var(--ink);color:var(--paper);padding:48px 0 56px;background-image:repeating-linear-gradient(135deg,transparent 0 22px,rgba(255,255,255,.025) 22px 44px)}
+.hero .wrap{display:grid;grid-template-columns:1fr;gap:28px}
+.hero h1{font-size:clamp(46px,9vw,104px)}
+.hero p{max-width:52ch;font-size:18px;color:#c9ccd1;margin:16px 0 0}
+.stage{background:var(--steel);border:1px solid var(--line);padding:18px 18px 12px;border-radius:6px}
+.stage svg{width:100%;height:auto;display:block}
+.car-body{fill:var(--paint);transition:fill .5s}
+.picker{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px}
+.picker span{font-size:14px;color:#c9ccd1;margin-right:6px}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid var(--steel);outline:2px solid var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{outline-color:var(--yellow)}
+.sw:focus-visible{outline:3px solid #fff}
+.cname{font-weight:700;color:var(--yellow);margin-left:auto}
+section{padding:70px 0}
+h2{font-size:clamp(34px,5vw,56px);margin-bottom:12px}
+.lead{max-width:60ch;color:#4a5058;margin:0 0 34px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;background:var(--ink);border:2px solid var(--ink)}
+.card{background:var(--paper);padding:26px}
+.card:hover{background:var(--yellow)}
+.card h3{font-size:28px;margin-bottom:8px}
+.card ul{margin:10px 0 0;padding-left:18px;font-size:15px}
+.dark{background:var(--ink);color:var(--paper)}
+.dark .lead{color:#c9ccd1}
+.ba{position:relative;aspect-ratio:600/260;max-width:820px;background:var(--steel);border:1px solid var(--line);overflow:hidden;border-radius:6px;touch-action:pan-y}
+.ba svg{position:absolute;inset:0;width:100%;height:100%}
+.ba .after{clip-path:inset(0 0 0 50%)}
+.ba .before{filter:grayscale(.85) sepia(.5) brightness(.7) contrast(.9)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.bar{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--yellow);pointer-events:none}
+.tag{position:absolute;bottom:10px;background:var(--ink);color:var(--paper);font-size:13px;font-weight:700;padding:3px 9px;border-radius:2px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;counter-reset:s;padding:0;list-style:none}
+.steps li{counter-increment:s;border-top:4px solid var(--yellow);padding-top:12px}
+.steps li::before{content:counter(s);font-stretch:75%;font-weight:800;font-size:44px;color:var(--yellow);display:block;line-height:1}
+.steps b{display:block;font-size:20px;margin:4px 0}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+.why p{margin:6px 0 0;color:#4a5058}
+.why h3{font-size:24px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
+form .full{grid-column:1/-1}
+label{font-size:14px;font-weight:600;display:block;margin-bottom:4px}
+input[type=text],input[type=tel],select,textarea{width:100%;padding:12px;font:inherit;background:var(--steel);color:var(--paper);border:1px solid var(--line);border-radius:3px}
+textarea{min-height:100px}
+@media(max-width:600px){form{grid-template-columns:1fr}}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.gal figure{margin:0;position:relative;aspect-ratio:4/3;background:var(--concrete);border:2px dashed #9a9a94;display:grid;place-items:center;text-align:center;font-weight:600;color:#55595f;overflow:hidden;border-radius:4px}
+.gal figure{border:1px solid var(--line)}.gal figure svg{position:absolute;inset:0;width:100%;height:100%}
+.gal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gal figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-size:13px;padding:4px 10px}
+footer{background:#0d0f12;color:#9aa0a8;padding:28px 0;font-size:14px}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="car" viewBox="0 0 600 250">
+<ellipse cx="305" cy="222" rx="270" ry="10" fill="#000" opacity=".35"/>
+<path class="car-body" d="M30 178V148Q30 130 62 124L148 108Q188 58 262 54H382Q444 58 484 108L544 120Q574 126 574 154V178Z"/>
+<path d="M170 106Q200 72 262 69H298V106Z M314 69H380Q420 73 452 106H314Z" fill="#9fc4de" opacity=".85"/>
+<path d="M298 69V178" stroke="#000" stroke-opacity=".25" stroke-width="2"/>
+<path d="M60 130Q120 114 200 112" stroke="#fff" stroke-opacity=".28" stroke-width="5" fill="none" stroke-linecap="round"/>
+<rect x="548" y="136" width="22" height="12" rx="3" fill="#fff6c9"/><rect x="30" y="140" width="14" height="12" rx="3" fill="#ff5a4f"/>
+<circle cx="140" cy="178" r="46" fill="#15181c"/><circle cx="470" cy="178" r="46" fill="#15181c"/>
+<g><circle cx="140" cy="178" r="36" fill="#0a0b0d"/><circle cx="140" cy="178" r="23" fill="#c9ccd1"/><circle cx="140" cy="178" r="8" fill="#555"/>
+<path d="M140 156V200M118 178H162M124 162L156 194M156 162L124 194" stroke="#555" stroke-width="3"/></g>
+<g><circle cx="470" cy="178" r="36" fill="#0a0b0d"/><circle cx="470" cy="178" r="23" fill="#c9ccd1"/><circle cx="470" cy="178" r="8" fill="#555"/>
+<path d="M470 156V200M448 178H492M454 162L486 194M486 162L454 194" stroke="#555" stroke-width="3"/></g>
+</symbol>
+</defs>
+</svg>
+
+<header><div class="wrap">
+<a class="logo" href="#top"><b>KHAN’s</b>Workplace</a>
+<nav><a href="#services">Services</a><a href="#gallery">Our work</a><a href="#before-after">Before &amp; after</a><a href="#process">How we work</a><a class="btn" href="#quote">Get a quote</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div>
+<h1>Your car,<br>rebuilt your way.</h1>
+<p>Modification, full rebuilds, repairs, paint, panel grafting and seat covers – done under one roof by people who treat your car like their own.</p>
+<p style="margin-top:22px"><a class="btn" href="#quote">Get a free estimate</a> &nbsp; <a class="btn ghost" href="#services">See what we do</a></p>
+</div>
+<div class="stage">
+<svg viewBox="0 0 600 250" role="img" aria-label="Car that changes colour when you pick a paint"><use href="#car"/></svg>
+<div class="picker" id="picker"><span>Try a paint colour:</span><b class="cname" id="cname">Signal Red</b></div>
+</div>
+</div></div>
+
+<section id="services"><div class="wrap">
+<h2>Everything your car needs</h2>
+<p class="lead">From a small scratch to a complete rebuild. Tell us the idea; we plan it, price it, and build it.</p>
+<div class="grid">
+<div class="card"><h3>Modification</h3><p>Make it faster, lower, louder or just yours.</p><ul><li>Alloy wheels &amp; tyres</li><li>Body kits, spoilers, bumpers</li><li>Exhaust &amp; suspension upgrades</li><li>LED headlights &amp; ambient lighting</li></ul></div>
+<div class="card"><h3>Full rebuild</h3><p>Strip to the shell and bring it back better than new.</p><ul><li>Engine &amp; gearbox overhaul</li><li>Chassis straightening</li><li>Restoration of classic cars</li><li>Wiring and electrical redo</li></ul></div>
+<div class="card"><h3>Repair &amp; service</h3><p>Honest diagnosis, fair price, no surprises.</p><ul><li>Engine, brakes, clutch, AC</li><li>Accident damage repair</li><li>Computer diagnosis</li><li>Periodic service</li></ul></div>
+<div class="card"><h3>Paint &amp; body</h3><p>Showroom shine, matched to the shade.</p><ul><li>Full respray &amp; panel paint</li><li>Dent removal &amp; scratch fix</li><li>Custom colours, matte &amp; pearl</li><li>Vinyl wraps &amp; ceramic coating</li></ul></div>
+<div class="card"><h3>Grafting &amp; welding</h3><p>Rusted or damaged panels cut out and replaced cleanly.</p><ul><li>Panel grafting &amp; patching</li><li>Rust removal &amp; treatment</li><li>Sill, pillar and floor repair</li><li>Anti-rust underbody coat</li></ul></div>
+<div class="card"><h3>Seat covers &amp; interior</h3><p>Make the inside as good as the outside.</p><ul><li>Leather &amp; custom-stitched seat covers</li><li>Dashboard, door-pad &amp; roof lining</li><li>Floor mats &amp; steering wraps</li><li>Music system &amp; speakers</li></ul></div>
+</div>
+</div></section>
+
+<section id="before-after" class="dark"><div class="wrap">
+<h2>See the difference</h2>
+<p class="lead">Drag across the car. Left is how it arrives, right is how it leaves. (Sample illustration – replace with your own photos.)</p>
+<div class="ba" id="ba">
+<svg class="before" viewBox="0 0 600 250" aria-hidden="true"><use href="#car"/><circle cx="220" cy="130" r="9" fill="#6b3a1d" opacity=".8"/><circle cx="420" cy="150" r="12" fill="#6b3a1d" opacity=".8"/><path d="M90 150l40 8" stroke="#2b2118" stroke-width="3"/></svg>
+<svg class="after" viewBox="0 0 600 250" aria-hidden="true"><use href="#car"/></svg>
+<div class="bar" id="bar"></div>
+<span class="tag" style="left:10px">Before</span><span class="tag" style="right:10px">After</span>
+<input type="range" min="0" max="100" value="50" id="rng" aria-label="Compare before and after">
+</div>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+<h2>Our work</h2>
+<p class="lead">Demo illustrations of the kind of work we do. Send your real photos and they replace these.</p>
+<div class="gal">
+<figure><svg viewBox="0 0 400 300" style="--paint:#e8741a" role="img" aria-label="Orange car being painted"><rect width="400" height="300" fill="#2a3038"/><rect y="215" width="400" height="85" fill="#1b1f24"/><circle cx="310" cy="75" r="34" fill="#e8741a" opacity=".22"/><circle cx="290" cy="90" r="20" fill="#e8741a" opacity=".3"/><rect x="325" y="55" width="50" height="16" rx="4" fill="#9aa0a8"/><use href="#car" x="20" y="60" width="360" height="150"/></svg><figcaption>Custom paint</figcaption></figure>
+<figure><svg viewBox="0 0 400 300" style="--paint:#8a8f96" role="img" aria-label="Car in primer on stands"><rect width="400" height="300" fill="#30353c"/><rect y="230" width="400" height="70" fill="#1b1f24"/><path d="M200 0V40" stroke="#777" stroke-width="2"/><circle cx="200" cy="46" r="14" fill="#f4c20d"/><circle cx="200" cy="46" r="40" fill="#f4c20d" opacity=".12"/><use href="#car" x="20" y="50" width="360" height="150"/><rect x="80" y="205" width="10" height="30" fill="#d33"/><rect x="310" y="205" width="10" height="30" fill="#d33"/></svg><figcaption>Full rebuild</figcaption></figure>
+<figure><svg viewBox="0 0 400 300" role="img" aria-label="Custom stitched car seat"><rect width="400" height="300" fill="#d8d6cf"/><rect x="145" y="20" width="110" height="36" rx="12" fill="#5a3118"/><rect x="130" y="58" width="140" height="140" rx="22" fill="#6b3a1d"/><rect x="110" y="190" width="180" height="60" rx="20" fill="#5a3118"/><path d="M150 75V180M200 75V180M250 75V180M130 128H270" stroke="#d9b27a" stroke-width="2" stroke-dasharray="6 5"/></svg><figcaption>Seat covers</figcaption></figure>
+<figure><svg viewBox="0 0 400 300" style="--paint:#c8201f" role="img" aria-label="Welding a rusted door panel"><rect width="400" height="300" fill="#272c33"/><rect y="215" width="400" height="85" fill="#1b1f24"/><use href="#car" x="20" y="60" width="360" height="150"/><ellipse cx="200" cy="138" rx="16" ry="9" fill="#6b3a1d"/><circle cx="200" cy="138" r="5" fill="#fff6c9"/><path d="M200 138l-22-18M200 138l24-20M200 138l-8-28M200 138l16 26" stroke="#f4c20d" stroke-width="2"/></svg><figcaption>Body repair &amp; grafting</figcaption></figure>
+<figure><svg viewBox="0 0 400 300" style="--paint:#1d3b8b" role="img" aria-label="Lowered car with spoiler and underglow"><rect width="400" height="300" fill="#1c2027"/><rect y="215" width="400" height="85" fill="#13161a"/><ellipse cx="200" cy="210" rx="165" ry="10" fill="#4aa8ff" opacity=".55"/><use href="#car" x="20" y="60" width="360" height="150"/><rect x="26" y="98" width="44" height="6" fill="#0b0c0e"/><path d="M36 104v14M60 104v14" stroke="#0b0c0e" stroke-width="3"/></svg><figcaption>Modification</figcaption></figure>
+<figure><svg viewBox="0 0 400 300" style="--paint:#2f7a4f" role="img" aria-label="Green wrapped car with black stripe"><rect width="400" height="300" fill="#e4e3de"/><rect y="215" width="400" height="85" fill="#c9c8c2"/><use href="#car" x="20" y="60" width="360" height="150"/><path d="M45 150H372" stroke="#111" stroke-width="5" opacity=".6"/></svg><figcaption>Wrap &amp; coating</figcaption></figure>
+</div>
+</div></section>
+
+<section id="process"><div class="wrap">
+<h2>How we work</h2>
+<p class="lead">Four clear steps, so you always know what is happening to your car.</p>
+<ol class="steps">
+<li><b>Inspect</b>We check the car with you and note every issue.</li>
+<li><b>Quote</b>A written price and timeline before any work starts.</li>
+<li><b>Build</b>Work is done in stages; you get photo updates.</li>
+<li><b>Hand over</b>Final check, test drive and warranty on the work.</li>
+</ol>
+</div></section>
+
+<section style="background:var(--concrete)"><div class="wrap">
+<h2>Why KHAN’s</h2><br>
+<div class="why">
+<div><h3>One workshop for everything</h3><p>Mechanic, painter, welder and upholstery team together – no running between shops.</p></div>
+<div><h3>Price before work</h3><p>You approve the estimate first. Extra work only with your permission.</p></div>
+<div><h3>Quality parts &amp; materials</h3><p>Branded paint, genuine or tested parts, and proper curing and finishing.</p></div>
+<div><h3>Progress you can see</h3><p>Photos at every stage, so you can follow the build from anywhere.</p></div>
+</div>
+</div></section>
+
+<section id="quote" class="dark"><div class="wrap">
+<h2>Get a free quote</h2>
+<p class="lead">Fill this in and it opens WhatsApp with your details ready to send.</p>
+<form id="qf">
+<div><label for="n">Your name</label><input type="text" id="n" required></div>
+<div><label for="p">Phone</label><input type="tel" id="p"></div>
+<div><label for="c">Car model &amp; year</label><input type="text" id="c" placeholder="e.g. Swift 2016" required></div>
+<div><label for="s">Service</label><select id="s"><option>Modification</option><option>Full rebuild</option><option>Repair &amp; service</option><option>Paint &amp; body</option><option>Grafting &amp; welding</option><option>Seat covers &amp; interior</option><option>Other</option></select></div>
+<div class="full"><label for="m">What do you want done?</label><textarea id="m"></textarea></div>
+<div class="full"><button class="btn" type="submit">Send on WhatsApp</button></div>
+</form>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<b style="color:#fff">KHAN’s Workplace</b> – Car modification, rebuild, repair, paint, grafting &amp; seat covers.<br>
+Address: add your workshop address here &nbsp;|&nbsp; Open: Mon–Sat, 9 am – 7 pm (edit) &nbsp;|&nbsp; Phone: add number
+</div></footer>
+
+<script>
+(function(){
+var WHATSAPP="910000000000"; // put your number with country code, no + or spaces
+var cols=[["Signal Red","#c8201f"],["Midnight Blue","#1d3b8b"],["Racing Green","#14674a"],["Pearl White","#e8e8e4"],["Sunset Orange","#e8741a"],["Gunmetal","#4b5563"],["Violet","#6a3fb5"]];
+var pk=document.getElementById("picker"),nm=document.getElementById("cname");
+cols.forEach(function(c,i){
+var b=document.createElement("button");b.className="sw";b.style.background=c[1];b.setAttribute("aria-label",c[0]);b.setAttribute("aria-pressed",i==0);
+b.onclick=function(){document.documentElement.style.setProperty("--paint",c[1]);nm.textContent=c[0];
+pk.querySelectorAll(".sw").forEach(function(x){x.setAttribute("aria-pressed",x===b)});};
+pk.insertBefore(b,nm);});
+var r=document.getElementById("rng"),a=document.querySelector(".ba .after"),bar=document.getElementById("bar");
+r.oninput=function(){a.style.clipPath="inset(0 0 0 "+r.value+"%)";bar.style.left=r.value+"%";};
+document.getElementById("qf").onsubmit=function(e){e.preventDefault();
+var t="Hello KHAN’s Workplace,\nName: "+n.value+"\nPhone: "+p.value+"\nCar: "+c.value+"\nService: "+s.value+"\nDetails: "+m.value;
+window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(t),"_blank");};
+})();
+</script>
+</body>
+</html>
